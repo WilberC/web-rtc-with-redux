@@ -6,11 +6,13 @@ import {
 } from "react-router-dom";
 import { Counter } from './features/counter/Counter';
 import { Login } from "./features/user/User";
+import { Questionnaire } from "./features/questionnaire/Questionnaire";
 
 
 function App() {
   const routes = [
     { path: "/counter", component: <Counter/> },
+    { path: "/questionnaires", component: <Questionnaire/> },
     { path: "/", component: <Login/> },
   ]
   return (

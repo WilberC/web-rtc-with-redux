@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 import { ButtonGhost, ButtonPrimary } from "../../components/buttons";
 import { InputGroup } from "../../components/input";
-import { useDispatch } from "react-redux";
-import { fetchLogin } from "./userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchLogin, selectUserData, selectUserError } from "./userSlice";
+import { ErrorMessage } from "../../components/errorMessage";
+import { useHistory } from "react-router-dom";
 
 export function Login() {
+  const history = useHistory();
+
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: null,
     password: null
   })
+  const error = useSelector(selectUserError)
+  const userData = useSelector(selectUserData)
+  if (typeof (userData?.id) === "number") {
+    history.push("/questionnaires")
+  }
 
   const submitForm = event => {
     event.preventDefault()
@@ -40,6 +49,7 @@ export function Login() {
           placeholder="******************"
           className="mb-4"
         />
+        { error && <ErrorMessage className="mb-4">{ error }</ErrorMessage> }
         <div className="flex justify-between">
           <ButtonPrimary type="submit">Login</ButtonPrimary>
           <ButtonGhost>Sign Up</ButtonGhost>

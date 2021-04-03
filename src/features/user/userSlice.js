@@ -5,14 +5,13 @@ export const fetchLogin = createAsyncThunk(
   'session/fetchLogin',
   async (credentials) => {
     try {
-      const userData = await (await fetch(`${ API_URL }/login`, FetchConfig(
+      return await (await fetch(`${ API_URL }/login`, FetchConfig(
         {
           method: 'POST',
           data: {
             user: credentials
           }
         }))).json()
-      return userData;
     } catch (e) {
       console.log(e)
       return e
@@ -20,22 +19,27 @@ export const fetchLogin = createAsyncThunk(
   }
 )
 
-export const counterSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    error: null,
+    userError: null,
     userData: null
   },
   reducers: {},
   extraReducers: {
     [fetchLogin.fulfilled]: (state, action) => {
+
+      if (action.payload?.id === null) {
+        state.userError = "Invalid user"
+        return;
+      }
+      state.userError = null
       state.userData = action.payload
     }
   }
 });
 
-export const { login } = counterSlice.actions;
+export const selectUserData = state => state.user.userData;
+export const selectUserError = state => state.user.userError;
 
-export const selectUserData = state => state.userData.value;
-
-export default counterSlice.reducer;
+export default userSlice.reducer;
