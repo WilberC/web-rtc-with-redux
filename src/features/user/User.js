@@ -5,11 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchLogin, selectUserData, selectUserError } from "./userSlice";
 import { ErrorMessage } from "../../components/errorMessage";
 import { useHistory } from "react-router-dom";
+import { Title } from "../../components/typography";
 
 export function Login() {
   const history = useHistory();
-
   const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     email: null,
     password: null
@@ -30,7 +31,7 @@ export function Login() {
         className="w-3/12 my-auto bg-black-background p-8 rounded border-4 border-indigo-500"
         onSubmit={ submitForm }
       >
-        <h1 className="text-indigo-500 text-5xl text-center mb-2 w-full">Login</h1>
+        <Title className="text-center mb-2">Login</Title>
         <InputGroup
           label="Email"
           name="email"

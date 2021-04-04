@@ -23,7 +23,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState: {
     userError: null,
-    userData: null
+    userData: localStorage.getItem("userData")
   },
   reducers: {},
   extraReducers: {
@@ -35,6 +35,7 @@ export const userSlice = createSlice({
       }
       state.userError = null
       state.userData = action.payload
+      localStorage.setItem("userData", JSON.stringify(action.payload))
     }
   }
 });
