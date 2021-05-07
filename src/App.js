@@ -7,12 +7,14 @@ import {
 import { Counter } from './features/counter/Counter';
 import { Login } from "./features/user/User";
 import { Questionnaire } from "./features/questionnaire/Questionnaire";
+import { QuestionnaireDetail } from "./features/questionnaire/QuestionnaireDetail";
 
 
 function App() {
   const routes = [
     { path: "/counter", component: <Counter/> },
     { path: "/questionnaires", component: <Questionnaire/> },
+    { path: "/questionnaire/:id", component: <QuestionnaireDetail/> },
     { path: "/", component: <Login/> },
   ]
   return (

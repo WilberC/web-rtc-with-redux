@@ -39,9 +39,10 @@ export function Questionnaire() {
         { questionnaires.map(({ id, attributes: questionnaire }) => (
           <VideoCard
             key={ id }
-            correctAnswers={ questionnaire["correct-answers"] }
-            incorrectAnswers={ questionnaire["incorrect-answers"] }
-            createdAt={ questionnaire["created-at"] }
+            questionnaireId={ id }
+            correctAnswers={ questionnaire.correctAnswers }
+            incorrectAnswers={ questionnaire.incorrectAnswers }
+            createdAt={ questionnaire.createdAt }
             thumbnail={ "https://designshack.net/wp-content/uploads/placeholder-image.png" }
             alt={ "abc" }
           />

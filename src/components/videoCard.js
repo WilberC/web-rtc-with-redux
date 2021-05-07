@@ -1,10 +1,14 @@
 import React from "react";
 import { TextNote } from "./typography";
+import { useHistory } from "react-router-dom";
+import { FormatDate } from "../utils/formatDate";
 
-export function VideoCard({ thumbnail, alt, correctAnswers, incorrectAnswers, createdAt }) {
+export function VideoCard({ thumbnail, alt, correctAnswers, incorrectAnswers, createdAt, questionnaireId }) {
+  const history = useHistory();
+
   return (
     <div className="grid auto-rows-min">
-      <div className="cursor-pointer">
+      <div className="cursor-pointer" onClick={ () => history.push(`/questionnaire/${ questionnaireId }`) }>
         <img
           className="object-cover rounded"
           alt={ alt }
@@ -20,7 +24,7 @@ export function VideoCard({ thumbnail, alt, correctAnswers, incorrectAnswers, cr
           <span>No Data</span>
         }
       </div>
-      <TextNote className="auto-rows-auto">created at: { createdAt || "___" }</TextNote>
+      <TextNote className="auto-rows-auto">created at: { FormatDate(createdAt) || "___" }</TextNote>
     </div>
   );
 }
